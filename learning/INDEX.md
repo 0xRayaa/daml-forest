@@ -1,6 +1,5 @@
 # DAML Learning Curriculum — Index
 
-> **Source material:** Daml 101 YouTube Playlist + Official DAML Docs + CredShields Security Guides
 > **Total lessons:** 8 core + 1 cheat sheet
 > **Progression:** Beginner → Advanced
 

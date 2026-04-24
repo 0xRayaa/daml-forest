@@ -185,7 +185,3 @@ Every chapter lives as a plain JS object in [courses.js](courses.js):
 ```
 
 Add a new entry to the relevant course's `chapters` array and reload. Progress is stored in `localStorage`.
-
-## Credits
-
-Curriculum draws from the Daml 101 playlist, the official DAML docs, and CredShields DAML security guides.
