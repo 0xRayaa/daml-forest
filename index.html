@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DamlForest — Learn DAML Smart Contract Security</title>
+<meta name="description" content="Grow your DAML security skills in the forest. Interactive lessons on smart contract vulnerabilities — from seedling to Ancient Tree."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#" onclick="showPage('home')">
+      <div class="logo-icon">🌲</div>
+      <span>Daml<span class="logo-accent">Forest</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#" onclick="showPage('courses')">Trails</a>
+      <a href="#" onclick="showPage('home')">About</a>
+    </div>
+    <div class="nav-progress" id="nav-progress">
+      <span class="rank-badge" id="nav-rank">Seedling</span>
+      <span class="bugs-count" id="nav-bugs">🐛 0</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════ HOME PAGE -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <!-- Animated forest particles -->
+    <div class="forest-particles" id="forest-particles"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">🌿 Free · Interactive · DAML Security</div>
+      <h1 class="hero-title">Grow Into a<br/><span class="gradient-text">DAML Security Expert</span></h1>
+      <p class="hero-sub">Enter the DamlForest — an interactive learning trail where you spot bugs, fix vulnerabilities, and grow from a tiny Seedling into an Ancient Tree of DAML wisdom.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="showPage('courses')">Enter the Forest →</button>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-n">12</span><span class="stat-l">Trails</span></div>
+          <div class="stat"><span class="stat-n">50+</span><span class="stat-l">Challenges</span></div>
+          <div class="stat"><span class="stat-n">6</span><span class="stat-l">Growth Stages</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- Animated Tree Character -->
+      <div class="tree-hero" id="hero-tree">
+        <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="trunkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#92400e"/>
+              <stop offset="40%" style="stop-color:#b45309"/>
+              <stop offset="100%" style="stop-color:#78350f"/>
+            </linearGradient>
+            <radialGradient id="canopy1" cx="50%" cy="30%" r="60%">
+              <stop offset="0%" style="stop-color:#86efac"/>
+              <stop offset="50%" style="stop-color:#22c55e"/>
+              <stop offset="100%" style="stop-color:#052e16"/>
+            </radialGradient>
+            <radialGradient id="canopy2" cx="50%" cy="25%" r="60%">
+              <stop offset="0%" style="stop-color:#4ade80"/>
+              <stop offset="55%" style="stop-color:#16a34a"/>
+              <stop offset="100%" style="stop-color:#052e16"/>
+            </radialGradient>
+            <radialGradient id="canopy3" cx="50%" cy="20%" r="60%">
+              <stop offset="0%" style="stop-color:#bbf7d0"/>
+              <stop offset="45%" style="stop-color:#22c55e"/>
+              <stop offset="100%" style="stop-color:#14532d"/>
+            </radialGradient>
+            <filter id="glow1"><feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="glow2"><feGaussianBlur stdDeviation="7" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+
+          <!-- Forest floor / grass -->
+          <ellipse cx="110" cy="300" rx="90" ry="12" fill="#052e16" opacity="0.6"/>
+          <ellipse cx="110" cy="298" rx="70" ry="8" fill="#064e24" opacity="0.5"/>
+
+          <!-- Roots -->
+          <path d="M97 278 Q72 284 54 296" stroke="url(#trunkGrad)" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M123 278 Q148 284 166 296" stroke="url(#trunkGrad)" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M110 282 Q110 292 110 302" stroke="url(#trunkGrad)" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path d="M97 285 Q82 294 70 302" stroke="#78350f" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M123 285 Q138 294 150 302" stroke="#78350f" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+          <!-- Trunk -->
+          <rect x="97" y="218" width="26" height="68" rx="10" fill="url(#trunkGrad)"/>
+          <!-- Bark details -->
+          <path d="M103 225 Q106 240 103 255" stroke="#78350f" stroke-width="2" fill="none" opacity="0.5"/>
+          <path d="M112 230 Q115 248 112 262" stroke="#78350f" stroke-width="1.5" fill="none" opacity="0.4"/>
+          <path d="M120 228 Q117 244 120 258" stroke="#78350f" stroke-width="2" fill="none" opacity="0.4"/>
+
+          <!-- Side branches -->
+          <path d="M100 240 Q76 228 62 220" stroke="url(#trunkGrad)" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <path d="M120 240 Q144 228 158 220" stroke="url(#trunkGrad)" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <path d="M100 255 Q80 246 68 242" stroke="#78350f" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M120 255 Q140 246 152 242" stroke="#78350f" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+          <!-- Small branch leaves -->
+          <ellipse cx="58" cy="215" rx="18" ry="13" fill="url(#canopy2)" opacity="0.85" filter="url(#glow1)"/>
+          <ellipse cx="162" cy="215" rx="18" ry="13" fill="url(#canopy2)" opacity="0.85" filter="url(#glow1)"/>
+          <ellipse cx="64" cy="238" rx="13" ry="10" fill="url(#canopy1)" opacity="0.8" filter="url(#glow1)"/>
+          <ellipse cx="156" cy="238" rx="13" ry="10" fill="url(#canopy1)" opacity="0.8" filter="url(#glow1)"/>
+
+          <!-- CANOPY — Tier 4 (bottom / widest) -->
+          <polygon points="110,192 42,240 178,240" fill="url(#canopy1)" filter="url(#glow1)" opacity="0.92"/>
+          <ellipse cx="110" cy="235" rx="70" ry="12" fill="#16a34a" opacity="0.7"/>
+
+          <!-- CANOPY — Tier 3 -->
+          <polygon points="110,156 52,208 168,208" fill="url(#canopy2)" filter="url(#glow1)"/>
+          <ellipse cx="110" cy="203" rx="58" ry="10" fill="#22c55e" opacity="0.6"/>
+
+          <!-- CANOPY — Tier 2 -->
+          <polygon points="110,120 62,176 158,176" fill="url(#canopy3)" filter="url(#glow2)"/>
+          <ellipse cx="110" cy="170" rx="48" ry="9" fill="#4ade80" opacity="0.5"/>
+
+          <!-- CANOPY — Tier 1 (top) -->
+          <polygon points="110,82 72,142 148,142" fill="url(#canopy1)" filter="url(#glow2)"/>
+          <ellipse cx="110" cy="137" rx="38" ry="8" fill="#22c55e" opacity="0.55"/>
+
+          <!-- CROWN (tip) -->
+          <polygon points="110,44 84,100 136,100" fill="url(#canopy3)" filter="url(#glow2)"/>
+          <ellipse cx="110" cy="96" rx="26" ry="7" fill="#86efac" opacity="0.5"/>
+
+          <!-- Star at top -->
+          <circle cx="110" cy="36" r="8" fill="#fbbf24" filter="url(#glow2)" opacity="0.95" class="sparkle"/>
+          <circle cx="110" cy="36" r="4" fill="#fff" opacity="0.9"/>
+
+          <!-- Fireflies / sparkles around canopy -->
+          <circle cx="40" cy="180" r="3.5" fill="#fbbf24" opacity="0.85" class="sparkle"/>
+          <circle cx="180" cy="165" r="3" fill="#fbbf24" opacity="0.8" class="sparkle2"/>
+          <circle cx="55" cy="140" r="2.5" fill="#86efac" opacity="0.9" class="sparkle"/>
+          <circle cx="168" cy="200" r="2.5" fill="#86efac" opacity="0.85" class="sparkle2"/>
+          <circle cx="32" cy="215" r="2" fill="#fbbf24" opacity="0.7" class="sparkle2"/>
+          <circle cx="190" cy="145" r="2" fill="#bbf7d0" opacity="0.75" class="sparkle"/>
+          <circle cx="78" cy="68" r="2" fill="#fbbf24" opacity="0.8" class="sparkle2"/>
+          <circle cx="145" cy="72" r="2.5" fill="#86efac" opacity="0.7" class="sparkle"/>
+
+          <!-- Small mushrooms at base -->
+          <ellipse cx="82" cy="295" rx="8" ry="4" fill="#78350f" opacity="0.7"/>
+          <path d="M82 295 Q82 288 82 283" stroke="#78350f" stroke-width="2" fill="none"/>
+          <ellipse cx="82" cy="283" rx="10" ry="5" fill="#ef4444" opacity="0.75"/>
+          <circle cx="80" cy="282" r="1.5" fill="white" opacity="0.8"/>
+          <circle cx="85" cy="280" r="1" fill="white" opacity="0.8"/>
+
+          <ellipse cx="140" cy="293" rx="6" ry="3" fill="#78350f" opacity="0.7"/>
+          <path d="M140 293 Q140 287 140 283" stroke="#78350f" stroke-width="1.5" fill="none"/>
+          <ellipse cx="140" cy="283" rx="8" ry="4" fill="#ef4444" opacity="0.7"/>
+          <circle cx="138" cy="282" r="1" fill="white" opacity="0.8"/>
+        </svg>
+      </div>
+      <!-- Floating code snippets -->
+      <div class="floating-code">
+        <div class="code-card card-1"><pre><span class="kw">template</span> Token
+  <span class="kw">with</span> amount : Decimal
+  <span class="kw">where</span>
+    <span class="kw">signatory</span> issuer
+    <span class="cm">-- ensure missing! 🌱</span></pre></div>
+        <div class="code-card card-2"><pre><span class="kw">ensure</span> amount <span class="op">&gt;</span> 0.0
+    <span class="op">&amp;&amp;</span> issuer <span class="op">/=</span> owner</pre></div>
+        <div class="code-card card-3"><pre><span class="bug">⚠ Value Leak Detected</span>
+fee tokens → vanished 🍂</pre></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why-section">
+    <div class="section-leaf-deco">🍃</div>
+    <h2>Why DamlForest?</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🌱</div>
+        <h3>Grow by Doing</h3>
+        <p>Write real DAML code in every chapter. No passive reading — spot bugs, fix contracts, grow your roots deeper with each challenge.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔐</div>
+        <h3>Security-First</h3>
+        <p>Based on real vulnerability research from OpenZeppelin's Canton audit and CredShields security guides. Learn what actually breaks in production.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🌳</div>
+        <h3>Grow Your Tree</h3>
+        <p>Watch your tree grow taller as you complete chapters. Progress from Seedling to Ancient Tree — 6 growth stages to master.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🆓</div>
+        <h3>Completely Free</h3>
+        <p>No sign-up, no paywall. All 12 trails and 50+ challenges, free forever. Your forest progress saved locally in your browser.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROWTH STAGES -->
+  <section class="ranks-section">
+    <h2>Your Growth Journey</h2>
+    <p class="section-sub">Every chapter brings you closer to Ancient Tree mastery.</p>
+    <div class="ranks-grid" id="ranks-display"></div>
+  </section>
+
+  <!-- TRAILS PREVIEW -->
+  <section class="preview-section">
+    <h2>The Forest Trails</h2>
+    <p class="section-sub">12 trails through the DAML forest — from first sprouts to advanced canopy.</p>
+    <div class="curriculum-grid" id="curriculum-preview"></div>
+    <button class="btn-primary" style="margin-top:2rem" onclick="showPage('courses')">Enter the Forest →</button>
+  </section>
+
+</div>
+
+<!-- ════════════════════════════════════ COURSES (TRAILS) PAGE -->
+<div id="page-courses" class="page">
+  <div class="courses-header">
+    <div class="courses-header-inner">
+      <h1>🌲 Forest Trails</h1>
+      <p>Walk each trail in order — the forest reveals itself step by step.</p>
+    </div>
+  </div>
+  <div class="courses-container">
+    <div class="courses-sidebar">
+      <h3>Your Grove</h3>
+      <div class="progress-overall">
+        <div class="tree-progress-visual" id="sidebar-tree-visual"></div>
+        <div class="progress-ring-wrap">
+          <svg viewBox="0 0 80 80" id="progress-ring-svg">
+            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6"/>
+            <circle cx="40" cy="40" r="32" fill="none" stroke="url(#rg)" stroke-width="6"
+              stroke-dasharray="201" stroke-dashoffset="201" stroke-linecap="round"
+              transform="rotate(-90 40 40)" id="progress-ring-circle"/>
+            <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#22c55e"/>
+              <stop offset="100%" style="stop-color:#86efac"/>
+            </linearGradient></defs>
+          </svg>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-stats">
+          <div><span id="chapters-done">0</span> / <span id="chapters-total">48</span> chapters</div>
+          <div class="rank-display">Stage: <strong id="sidebar-rank">Seedling</strong></div>
+          <div>Bugs Found: <strong id="sidebar-bugs">0</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="courses-list" id="courses-list"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ LESSON PAGE -->
+<div id="page-lesson" class="page">
+  <div class="lesson-layout">
+
+    <!-- LEFT: Trail Guide -->
+    <div class="lesson-left" id="lesson-left">
+      <div class="lesson-nav-top">
+        <button class="btn-back" onclick="showPage('courses')">← Trails</button>
+        <span class="lesson-breadcrumb" id="lesson-breadcrumb"></span>
+      </div>
+      <div class="lesson-content" id="lesson-content"></div>
+      <div class="lesson-task-box" id="lesson-task-box"></div>
+      <div class="hint-area" id="hint-area"></div>
+    </div>
+
+    <!-- CENTER: Code Editor -->
+    <div class="lesson-center">
+      <div class="editor-topbar">
+        <span class="editor-filename">🌿 contract.daml</span>
+        <div class="editor-actions">
+          <button class="btn-hint" id="btn-hint" onclick="showHint()">🍃 Hint</button>
+          <button class="btn-reset" onclick="resetCode()">↺ Reset</button>
+        </div>
+      </div>
+      <div id="monaco-editor" style="height:100%;min-height:420px;"></div>
+      <div class="editor-feedback" id="editor-feedback"></div>
+    </div>
+
+    <!-- RIGHT: Tree Character -->
+    <div class="lesson-right">
+      <div class="character-panel">
+        <div class="character-tree" id="char-tree"></div>
+        <div class="char-rank" id="char-rank">Seedling</div>
+        <div class="growth-bar-wrap">
+          <div class="growth-bar" id="growth-bar"></div>
+        </div>
+      </div>
+      <div class="lesson-stats">
+        <div class="stat-box">
+          <div class="stat-label">Bugs Fixed</div>
+          <div class="stat-value" id="stat-bugs">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Chapter</div>
+          <div class="stat-value" id="stat-chapter">1</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Trail</div>
+          <div class="stat-value" id="stat-course">1</div>
+        </div>
+      </div>
+      <div class="chapter-list-panel">
+        <h4>🗺️ Trail Map</h4>
+        <div id="chapter-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="lesson-bottom">
+    <button class="btn-nav" id="btn-prev" onclick="prevChapter()">← Back</button>
+    <div class="bottom-center">
+      <span id="chapter-indicator"></span>
+      <div class="bottom-progress-bar"><div id="bottom-progress-fill"></div></div>
+    </div>
+    <button class="btn-check" id="btn-check" onclick="checkAnswer()">Check Answer 🌱</button>
+    <button class="btn-nav btn-next" id="btn-next" onclick="nextChapter()" style="display:none">Next →</button>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="success-modal" style="display:none">
+  <div class="modal">
+    <div class="modal-icon" id="modal-icon">🌱</div>
+    <h2 id="modal-title">Trail Marker Reached!</h2>
+    <p id="modal-msg"></p>
+    <div class="modal-rank" id="modal-rank-up" style="display:none">
+      <span>🌳 New Growth Stage: </span><strong id="modal-rank-name"></strong>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-secondary" onclick="closeModal()">Stay Here</button>
+      <button class="btn-primary" onclick="nextChapter();closeModal()">Next Chapter →</button>
+    </div>
+  </div>
+</div>
+
+<script src="courses.js"></script>
+<script src="app.js"></script>
+<script>
+var require = { paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs' } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+<script src="editor.js"></script>
+
+<script>
+// Forest particle animation
+(function() {
+  const container = document.getElementById('forest-particles');
+  if (!container) return;
+  const emojis = ['🍃','🌿','✨','🍂','🌱','💚'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      animation-delay:${Math.random()*8}s;
+      animation-duration:${8 + Math.random()*6}s;
+      font-size:${0.8 + Math.random()*0.8}rem;
+      opacity:${0.15 + Math.random()*0.2};
+    `;
+    container.appendChild(p);
+  }
+})();
+
+// Ranks display on home
+const RANK_DISPLAY = [
+  { name:"Seedling",       icon:"🌱", desc:"Just planted your roots" },
+  { name:"Sapling",        icon:"🌿", desc:"Growing your first branches" },
+  { name:"Young Tree",     icon:"🌳", desc:"Leaves spreading wide" },
+  { name:"Forest Guardian",icon:"🦉", desc:"Protecting the grove" },
+  { name:"Elder Tree",     icon:"🌲", desc:"Centuries of wisdom" },
+  { name:"Ancient Tree",   icon:"🏔️", desc:"The forest bows to you" }
+];
+document.getElementById('ranks-display').innerHTML = RANK_DISPLAY.map(r => `
+  <div class="rank-card">
+    <div class="rank-icon">${r.icon}</div>
+    <div class="rank-name">${r.name}</div>
+    <div class="rank-desc">${r.desc}</div>
+  </div>`).join('');
+</script>
+</body>
+</html>
