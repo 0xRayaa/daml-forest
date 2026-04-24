@@ -1,5 +1,11 @@
 # 🌲 DamlForest
 
+![version](https://img.shields.io/badge/version-1.0.0-22c55e)
+![license](https://img.shields.io/badge/license-MIT-blue)
+![status](https://img.shields.io/badge/status-active-brightgreen)
+
+## About
+
 **Grow into a DAML security expert.** An interactive, browser-based learning trail for spotting and fixing vulnerabilities in [DAML](https://www.digitalasset.com/developers) smart contracts — from tiny *Seedling* to *Ancient Tree*.
 
 No build step. No backend. Open [index.html](index.html) and start learning.
